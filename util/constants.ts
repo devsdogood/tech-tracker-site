@@ -1,3 +1,3 @@
 // TODO: remove exception after adding more constants
 // eslint-disable-next-line import/prefer-default-export
-export const REFRESH_INTERVAL = 30;
+export const REFRESH_INTERVAL = 300;

@@ -1,3 +1,9 @@
 .title-text {
     color: darkblue;
+    display: flex;
+    flex-direction: row;
+    padding-top: 35px;
+    padding-left: 15px;
+    font-weight: bold;
 }
+
