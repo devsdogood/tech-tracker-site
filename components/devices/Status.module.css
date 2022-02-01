@@ -1,3 +1,25 @@
 .title-text {
-    color: darkblue;
+    color: #002D72;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.devices {
+    
+    font-size: 30px;
+    text-align: justify;
+    padding: 40px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.badges {
+    text-align: justify;
+    flex:1;
+    height:100px;
+    font-size: 1em;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.main {
+    background-color: #F2F3F4;
 }
