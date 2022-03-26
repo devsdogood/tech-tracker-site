@@ -1,0 +1,21 @@
+datasource db {
+    url      = env("DB_URL")
+    provider = "mysql"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Device {
+    id          Int      @id @default(autoincrement())
+    ip          String
+    name        String
+    lastUpdated DateTime @default(now())
+    status      Status   @default(OFFLINE)
+}
+
+enum Status {
+    ONLINE
+    OFFLINE
+}
