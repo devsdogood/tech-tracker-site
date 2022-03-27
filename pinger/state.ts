@@ -2,7 +2,7 @@ import { unionBy } from 'lodash';
 import { Device, PrismaClient } from '@shared/types/generated';
 
 export default class PingState {
-  devices: Device[];
+  devices: Device[] = [];
 
   refresh = 0;
 
@@ -36,6 +36,13 @@ export default class PingState {
 
     // Update local device state
     const device = this.devices.find((d) => d.id === id);
+
+    if (!device) {
+      // eslint-disable-next-line no-console
+      console.warn(`Could not find device with id ${id}`);
+      return;
+    }
+
     device.status = status;
     device.lastUpdated = lastUpdated;
   };
