@@ -1,5 +1,5 @@
 export type ErrorType = {
-    error: string;
+  error: string;
 };
 
 export type ApiResult<T> = ErrorType | T;

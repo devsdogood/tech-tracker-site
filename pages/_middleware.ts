@@ -1,15 +1,15 @@
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
+import { NextApiRequest } from 'next';
+import { NextResponse } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
-const dev = process.env.NODE_ENV !== "production";
+const dev = process.env.NODE_ENV !== 'production';
 const server = dev
-  ? "http://localhost:3000"
-  : "https://tech-tracker-site.vercel.app";
+  ? 'http://localhost:3000'
+  : 'https://tech-tracker-site.vercel.app';
 
-export async function middleware(req: NextApiRequest) {
+export default async function middleware(req: NextApiRequest) {
   // Allow NextAuth requests
-  if (req.url!.includes("/auth/")) {
+  if (req.url!.includes('/auth/')) {
     return NextResponse.next();
   }
 

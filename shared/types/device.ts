@@ -1,4 +1,4 @@
-import { Device } from "@prisma/client";
+import { Device } from '@prisma/client';
 
 export type DeviceResponse = {
   devices: Device[];

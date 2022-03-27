@@ -1,3 +1,39 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb-typescript"
+  ],
+  "parserOptions": {
+    "project": "tsconfig.json"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts?(x)"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaFeatures": {
+          "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+      },
+      "extends": ["plugin:react/recommended", "airbnb-typescript"],
+      "plugins": ["react", "@typescript-eslint"],
+      "rules": {
+        "react/jsx-uses-react": "off",
+        "react/react-in-jsx-scope": "off",
+        "react/prop-types": "off",
+        "react/require-default-props": "off",
+        "react/function-component-definition": [
+          2,
+          {
+            "namedComponents": "function-declaration"
+          }
+        ]
+      }
+    }
+  ],
+  "ignorePatterns": ["next.config.js"]
 }

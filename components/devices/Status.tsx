@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from "./Status.module.css"
+import styles from './Status.module.css';
 
-const Status = () => {
+function Status() {
   return (
-      <div className={styles['title-text']}>Tech Tracker Site</div>
-  )
-};
+    <div className={styles['title-text']}>Tech Tracker Site</div>
+  );
+}
 
 export default Status;

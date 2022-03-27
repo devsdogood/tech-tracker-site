@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import ping from 'ping';
 import cron from 'node-cron';
 import { PingResult, toStatus } from '@util/devices';
