@@ -1,5 +1,5 @@
 import { unionBy } from 'lodash';
-import { Device, PrismaClient } from '@shared/types/generated';
+import { Device, PrismaClient } from '@prisma/client';
 
 export default class PingState {
   devices: Device[] = [];
