@@ -1,3 +1,4 @@
+import { Status } from "@prisma/client";
 import { DeviceResponse } from "@shared/types/device";
 
 export const fetchDevices = async (
@@ -8,3 +9,8 @@ export const fetchDevices = async (
 
   return data;
 };
+
+export const toStatus = (bool: boolean): Status => {
+  if (bool) return "ONLINE";
+  else return "OFFLINE";
+}
