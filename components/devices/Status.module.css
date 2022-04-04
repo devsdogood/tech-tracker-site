@@ -1,3 +1,24 @@
 .title-text {
     color: darkblue;
+    display: flex;
+    flex-direction: row;
+    padding-top: 35px;
+    padding-left: 15px;
+    font-weight: bold;
 }
+
+.paper-grid {
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.input-box {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.moment {
+    margin-left: 3px;
+}
+
+

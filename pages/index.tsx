@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import Status from '../components/devices/Status';
 
 function Home() {
   return (
@@ -12,10 +11,6 @@ function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          <Status />
-        </h1>
-
         <p className={styles.description}>
           Get started by editing
           {' '}
