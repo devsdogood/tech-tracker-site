@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Device } from '@prisma/client';
 import {
-  ActionIcon, Input, Badge, Paper,
+  ActionIcon, Input, Badge, Paper, Grid,
 } from '@mantine/core';
-import { Adjustments } from 'tabler-icons-react';
+import { Edit } from 'tabler-icons-react';
+import Moment from 'react-moment';
 import styles from './Status.module.css';
 
 type StatusProps = {
@@ -11,21 +12,29 @@ type StatusProps = {
 };
 
 function Status({ device }: StatusProps) {
-  const color = device.status === 'ONLINE' ? 'green' : 'red';
-  const [Edit, toggleEdit] = useState<Boolean>(true);
+  const color = device?.status === 'ONLINE' ? 'green' : 'red';
+  const [edit, toggleEdit] = useState(false);
 
   return (
     <div className={styles['title-text']}>
-      <Paper shadow="xs" radius="xl" p="md" withBorder>
-        <Badge color={color} size="xl" variant="dot">{device.name}</Badge>
-        <ActionIcon onClick={() => toggleEdit(!Edit)}>
-          <Adjustments size={16} />
-        </ActionIcon>
-        <Input variant="default" placeholder="Enter ID" disabled={!Edit} />
-        <Input variant="default" placeholder="Enter IP" disabled={!Edit} />
+      <Paper shadow="xl" radius="xl" p="md" withBorder>
+        <Grid className={styles['paper-grid']} justify="space-between">
+          <Grid.Col span={3}>
+            <Badge color={color} size="xl" variant="dot">{device?.name}</Badge>
+          </Grid.Col>
+          <Grid.Col span={2}>
+            <ActionIcon color="blue" size="md" variant="hover" onClick={() => toggleEdit(!edit)}>
+              <Edit size={16} />
+            </ActionIcon>
+          </Grid.Col>
+        </Grid>
+        <Input className={styles['input-box']} variant="default" placeholder="Enter Name" defaultValue={device?.name} disabled={!edit} />
+        <Input className={styles['input-box']} variant="default" placeholder="Enter IP" defaultValue={device?.ip} disabled={!edit} />
         <div>
           Last Updated:
-          {device.lastUpdated}
+          <Moment className={styles.moment} fromNow>
+            {device?.lastUpdated}
+          </Moment>
         </div>
       </Paper>
     </div>

@@ -7,3 +7,18 @@
     font-weight: bold;
 }
 
+.paper-grid {
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.input-box {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.moment {
+    margin-left: 3px;
+}
+
+
