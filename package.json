@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@mantine/core": "^4.0.9",
+    "@mantine/form": "^4.2.2",
     "@mantine/hooks": "^4.0.9",
     "@prisma/client": "^3.11.1",
     "lodash": "^4.17.21",
