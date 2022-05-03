@@ -38,7 +38,6 @@ function Status({ device }: StatusProps) {
         </div>
       </Paper>
     </div>
-
   );
 }
 
