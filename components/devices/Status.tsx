@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
-import { Device } from '@prisma/client';
-import {
-  ActionIcon, Input, Badge, Paper, Grid,
-} from '@mantine/core';
-import { Edit } from 'tabler-icons-react';
 import Moment from 'react-moment';
-import styles from './Status.module.css';
+import {
+  Box,
+  Text,
+  Stack,
+  useColorModeValue,
+  SimpleGrid,
+  IconButton,
+} from '@chakra-ui/react';
+import { EditIcon } from '@chakra-ui/icons';
+import { Device } from '@prisma/client';
+import { useState } from 'react';
+import DeviceForm from './DeviceForm';
 
 type StatusProps = {
   device: Device;
@@ -13,31 +18,62 @@ type StatusProps = {
 
 function Status({ device }: StatusProps) {
   const color = device?.status === 'ONLINE' ? 'green' : 'red';
-  const [edit, toggleEdit] = useState(false);
+  const [editing, setEditing] = useState(false);
 
   return (
-    <div className={styles['title-text']}>
-      <Paper shadow="xl" radius="xl" p="md" withBorder>
-        <Grid className={styles['paper-grid']} justify="space-between">
-          <Grid.Col span={3}>
-            <Badge color={color} size="xl" variant="dot">{device?.name}</Badge>
-          </Grid.Col>
-          <Grid.Col span={2}>
-            <ActionIcon color="blue" size="md" variant="hover" onClick={() => toggleEdit(!edit)}>
-              <Edit size={16} />
-            </ActionIcon>
-          </Grid.Col>
-        </Grid>
-        <Input className={styles['input-box']} variant="default" placeholder="Enter Name" defaultValue={device?.name} disabled={!edit} />
-        <Input className={styles['input-box']} variant="default" placeholder="Enter IP" defaultValue={device?.ip} disabled={!edit} />
-        <div>
-          Last Updated:
-          <Moment className={styles.moment} fromNow>
-            {device?.lastUpdated}
+    <Box
+      maxW="350px"
+      bg={useColorModeValue('white', 'gray.900')}
+      boxShadow="xl"
+      rounded="md"
+      overflow="hidden"
+      pb={6}
+    >
+      <Stack
+        p={6}
+        color={useColorModeValue('gray.800', 'white')}
+      >
+        <SimpleGrid columns={2}>
+          <Text
+            fontSize="sm"
+            fontWeight={500}
+            bg={useColorModeValue(`${color}.50`, `${color}.900`)}
+            p={2}
+            px={3}
+            color={`${color}.500`}
+            rounded="full"
+            width="max-content"
+          >
+            {device.status}
+          </Text>
+          <IconButton
+            marginLeft="auto"
+            width="max-content"
+            aria-label="Edit device data"
+            onClick={() => setEditing(!editing)}
+            icon={<EditIcon />}
+          />
+        </SimpleGrid>
+      </Stack>
+
+      <Stack>
+        <DeviceForm
+          buttonText="Update Device"
+          initialValues={device}
+          disabled={!editing}
+        />
+      </Stack>
+
+      <Stack px={6} pt={2}>
+        <Text fontSize="sm">
+          Last updated
+          {' '}
+          <Moment fromNow>
+            {device.lastUpdated}
           </Moment>
-        </div>
-      </Paper>
-    </div>
+        </Text>
+      </Stack>
+    </Box>
   );
 }
 

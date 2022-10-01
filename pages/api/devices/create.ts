@@ -7,7 +7,7 @@ const create = async (
   req: NextApiRequest,
   res: NextApiResponse<ApiResult<DeviceCreateResponse>>,
 ) => {
-  const { name, ip } = req.query;
+  const { name, ip } = req.body;
 
   // TODO: flesh out error handling/schema
   if (!name || Array.isArray(name)) {
@@ -21,16 +21,21 @@ const create = async (
   }
 
   const prisma = new PrismaClient();
-  const device = await prisma.device.create({
-    data: {
-      name,
-      ip,
-    },
-  });
 
-  res.json({
-    device,
-  });
+  try {
+    const device = await prisma.device.create({
+      data: {
+        name,
+        ip,
+      },
+    });
+
+    res.json({
+      device,
+    });
+  } catch (e) {
+    res.status(400).send({ error: String(e) });
+  }
 };
 
 export default create;
