@@ -35,21 +35,12 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Devices',
-    children: [
-      {
-        label: 'Device Dashboard',
-        href: '/',
-      },
-      {
-        label: 'Add Device',
-        href: '/new',
-      },
-    ],
+    label: 'Device Dashboard',
+    href: '/',
   },
   {
-    label: 'Sign Out',
-    href: '/signout',
+    label: 'Add Device',
+    href: '/new',
   },
 ];
 
