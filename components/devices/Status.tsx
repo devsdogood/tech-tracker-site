@@ -7,18 +7,30 @@ import {
   SimpleGrid,
   IconButton,
 } from '@chakra-ui/react';
-import { EditIcon } from '@chakra-ui/icons';
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import { Device } from '@prisma/client';
 import { useState } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import DeviceForm from './DeviceForm';
 
 type StatusProps = {
-  device: Device;
+  device: Device,
 };
 
 function Status({ device }: StatusProps) {
   const color = device?.status === 'ONLINE' ? 'green' : 'red';
   const [editing, setEditing] = useState(false);
+
+  const deleteDevice = async () => {
+    try {
+      await axios.post('/api/devices/delete', { id: device.id });
+    } catch (e: any) {
+      return toast.error(`Error deleting device: ${e.response?.data.error}`);
+    }
+
+    return toast.success(`Deleted device: ${device.name}`);
+  };
 
   return (
     <Box
@@ -46,13 +58,22 @@ function Status({ device }: StatusProps) {
           >
             {device.status}
           </Text>
-          <IconButton
-            marginLeft="auto"
-            width="max-content"
-            aria-label="Edit device data"
-            onClick={() => setEditing(!editing)}
-            icon={<EditIcon />}
-          />
+          <Box marginLeft="auto">
+            <IconButton
+              width="max-content"
+              aria-label="Edit device data"
+              onClick={() => setEditing(!editing)}
+              icon={<EditIcon />}
+              mr={2}
+            />
+            <IconButton
+              colorScheme="red"
+              width="max-content"
+              aria-label="Edit device data"
+              onClick={() => deleteDevice()}
+              icon={<DeleteIcon />}
+            />
+          </Box>
         </SimpleGrid>
       </Stack>
 
@@ -61,6 +82,7 @@ function Status({ device }: StatusProps) {
           buttonText="Update Device"
           initialValues={device}
           disabled={!editing}
+          id={device.id}
         />
       </Stack>
 

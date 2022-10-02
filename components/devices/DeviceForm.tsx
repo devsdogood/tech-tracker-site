@@ -11,10 +11,12 @@ import {
 import deviceSchema from '@shared/schemas/device-schema';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { assign } from 'lodash';
 
 type DeviceFormProps = {
   buttonText: 'Add Device' | 'Update Device';
   disabled: boolean,
+  id?: number,
   initialValues?: {
     name: string,
     ip: string,
@@ -22,20 +24,34 @@ type DeviceFormProps = {
 };
 
 // eslint-disable-next-line react/function-component-definition
-const DeviceForm: React.FC<DeviceFormProps> = ({ buttonText, disabled, initialValues }) => (
+const DeviceForm: React.FC<DeviceFormProps> = ({
+  buttonText, disabled, initialValues, id,
+}) => (
   <Box bg="white" rounded="md" px="1em">
     <Formik
       initialValues={initialValues || { name: '', ip: '' }}
       validationSchema={deviceSchema}
       onSubmit={async (values, { resetForm }) => {
+        const url = id ? 'update' : 'create';
+        const data = id ? values : assign(values, { id });
+
         try {
-          await axios.post('/api/devices/create', values);
+          await axios.post(`/api/devices/${url}`, data);
         } catch (e: any) {
-          return toast.error(`Error creating device: ${e.response?.data.error}`);
+          // reset form when updating if error
+          if (id) {
+            resetForm();
+          }
+
+          return toast.error(`Error updating device: ${e.response?.data.error}`);
         }
 
-        toast.success(`Added ${values.name}`);
-        return resetForm();
+        // if creating new device, reset form when complete
+        if (!id) {
+          resetForm();
+        }
+
+        return toast.success(`Updated device: ${values.name}`);
       }}
     >
       {({ handleSubmit, errors, touched }) => (

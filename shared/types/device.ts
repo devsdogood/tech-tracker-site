@@ -8,3 +8,7 @@ export type DeviceResponse = {
 export type DeviceCreateResponse = {
   device: Device,
 };
+
+export type DeviceDeleteResponse = {
+  success: true,
+};
