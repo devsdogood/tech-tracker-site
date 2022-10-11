@@ -3,19 +3,24 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { DeviceCreateResponse } from '@shared/types/device';
 import { ApiResult } from '@shared/types/util';
 
-const create = async (
+const update = async (
   req: NextApiRequest,
   res: NextApiResponse<ApiResult<DeviceCreateResponse>>,
 ) => {
-  const { name, ip } = req.body;
+  const { id, name, ip } = req.body;
 
   // TODO: flesh out error handling/schema
-  if (!name || Array.isArray(name)) {
+  if (!id) {
+    res.status(400).send({ error: '<id> must be defined' });
+    throw new Error('ID was not defined');
+  }
+
+  if (!name) {
     res.status(400).send({ error: '<name> must be defined' });
     throw new Error('Name was not defined');
   }
 
-  if (!ip || Array.isArray(ip)) {
+  if (!ip) {
     res.status(400).send({ error: '<ip> must be defined' });
     throw new Error('IP address was not defined');
   }
@@ -23,7 +28,10 @@ const create = async (
   const prisma = new PrismaClient();
 
   try {
-    const device = await prisma.device.create({
+    const device = await prisma.device.update({
+      where: {
+        id,
+      },
       data: {
         name,
         ip,
@@ -38,4 +46,4 @@ const create = async (
   }
 };
 
-export default create;
+export default update;

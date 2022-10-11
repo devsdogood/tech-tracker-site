@@ -12,3 +12,7 @@ export type UserCreateResponse = {
 export type DeviceCreateResponse = {
   device: Device,
 };
+
+export type DeviceDeleteResponse = {
+  success: true,
+};

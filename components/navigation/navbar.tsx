@@ -44,8 +44,8 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'Add User',
-    href: '/user'
-  }
+    href: '/user',
+  },
 ];
 
 function DesktopSubNav({ label, href, subLabel }: NavItem) {

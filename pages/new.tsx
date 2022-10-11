@@ -9,7 +9,7 @@ function NewDevicePage() {
         <title>Add Device</title>
       </Head>
       <Box w="100%" maxW="500px">
-        <DeviceForm buttonText="Add Device" disabled={false}/>
+        <DeviceForm buttonText="Add Device" disabled={false} />
       </Box>
     </Center>
   );
