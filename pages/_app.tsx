@@ -4,15 +4,13 @@ import WithSubnavigation from 'components/navigation/navbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function App({ Component, pageProps }: AppProps) {
-  return (
-    <ChakraProvider>
-      <WithSubnavigation />
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <Component {...pageProps} />
-      <ToastContainer />
-    </ChakraProvider>
-  );
-}
+const App = ({ Component, pageProps }: AppProps) => (
+  <ChakraProvider>
+    <WithSubnavigation />
+    {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+    <Component {...pageProps} />
+    <ToastContainer />
+  </ChakraProvider>
+);
 
 export default App;

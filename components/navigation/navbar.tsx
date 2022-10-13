@@ -42,47 +42,49 @@ const NAV_ITEMS: Array<NavItem> = [
     label: 'Add Device',
     href: '/new',
   },
+  {
+    label: 'Add User',
+    href: '/user',
+  },
 ];
 
-function DesktopSubNav({ label, href, subLabel }: NavItem) {
-  return (
-    <NextLink href={href ?? ''} passHref>
-      <Link
-        role="group"
-        display="block"
-        p={2}
-        rounded="md"
-        _hover={{ bg: useColorModeValue('orange.50', 'gray.900') }}
-      >
-        <Stack direction="row" align="center">
-          <Box>
-            <Text
-              transition="all .3s ease"
-              _groupHover={{ color: 'orange.400' }}
-              fontWeight={500}
-            >
-              {label}
-            </Text>
-            <Text fontSize="sm">{subLabel}</Text>
-          </Box>
-          <Flex
+const DesktopSubNav = ({ label, href, subLabel }: NavItem) => (
+  <NextLink href={href ?? ''} passHref>
+    <Link
+      role="group"
+      display="block"
+      p={2}
+      rounded="md"
+      _hover={{ bg: useColorModeValue('orange.50', 'gray.900') }}
+    >
+      <Stack direction="row" align="center">
+        <Box>
+          <Text
             transition="all .3s ease"
-            transform="translateX(-10px)"
-            opacity={0}
-            _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-            justify="flex-end"
-            align="center"
-            flex={1}
+            _groupHover={{ color: 'orange.400' }}
+            fontWeight={500}
           >
-            <Icon color="orange.400" w={5} h={5} as={ChevronRightIcon} />
-          </Flex>
-        </Stack>
-      </Link>
-    </NextLink>
-  );
-}
+            {label}
+          </Text>
+          <Text fontSize="sm">{subLabel}</Text>
+        </Box>
+        <Flex
+          transition="all .3s ease"
+          transform="translateX(-10px)"
+          opacity={0}
+          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
+          justify="flex-end"
+          align="center"
+          flex={1}
+        >
+          <Icon color="orange.400" w={5} h={5} as={ChevronRightIcon} />
+        </Flex>
+      </Stack>
+    </Link>
+  </NextLink>
+);
 
-function DesktopNav() {
+const DesktopNav = () => {
   const linkColor = useColorModeValue('gray.600', 'gray.200');
   const linkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
@@ -132,9 +134,9 @@ function DesktopNav() {
       ))}
     </Stack>
   );
-}
+};
 
-function MobileNavItem({ label, children, href }: NavItem) {
+const MobileNavItem = ({ label, children, href }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -189,24 +191,22 @@ function MobileNavItem({ label, children, href }: NavItem) {
       </Collapse>
     </Stack>
   );
-}
+};
 
-function MobileNav() {
-  return (
-    <Stack
-      bg={useColorModeValue('white', 'gray.800')}
-      p={4}
-      display={{ md: 'none' }}
-    >
-      {NAV_ITEMS.map((navItem) => (
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        <MobileNavItem key={navItem.label} {...navItem} />
-      ))}
-    </Stack>
-  );
-}
+const MobileNav = () => (
+  <Stack
+    bg={useColorModeValue('white', 'gray.800')}
+    p={4}
+    display={{ md: 'none' }}
+  >
+    {NAV_ITEMS.map((navItem) => (
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      <MobileNavItem key={navItem.label} {...navItem} />
+    ))}
+  </Stack>
+);
 
-export default function WithSubnavigation() {
+const WithSubnavigation = () => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -256,4 +256,6 @@ export default function WithSubnavigation() {
       </Collapse>
     </Box>
   );
-}
+};
+
+export default WithSubnavigation;
