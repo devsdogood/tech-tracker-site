@@ -22,10 +22,7 @@ type NewUserPageProps = {
 };
 const NewUserPage: React.FC<NewUserPageProps> = ({ users }) => {
   useEffect(() => {
-    (async function () {
-      const user = await axios.post('/api/auth/add', { email: 'tyleremanuel23@gmail.com' });
-      console.log(user);
-    }());
+    axios.post('/api/auth/add', { email: 'tyleremanuel23@gmail.com' });
   });
 
   return (
