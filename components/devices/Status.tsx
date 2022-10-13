@@ -18,7 +18,7 @@ type StatusProps = {
   device: Device,
 };
 
-function Status({ device }: StatusProps) {
+const Status = ({ device }: StatusProps) => {
   const color = device?.status === 'ONLINE' ? 'green' : 'red';
   const [editing, setEditing] = useState(false);
 
@@ -88,7 +88,7 @@ function Status({ device }: StatusProps) {
 
       <Stack px={6} pt={2}>
         <Text fontSize="sm">
-          Last updated
+          Status Last Changed:
           {' '}
           <Moment fromNow>
             {device.lastUpdated}
@@ -97,6 +97,6 @@ function Status({ device }: StatusProps) {
       </Stack>
     </Box>
   );
-}
+};
 
 export default Status;

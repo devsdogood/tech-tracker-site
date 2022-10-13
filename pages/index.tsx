@@ -3,7 +3,7 @@ import useDevices from '@util/hooks/useDevices';
 import Status from 'components/devices/Status';
 import Head from 'next/head';
 
-function Dashboard() {
+const Dashboard = () => {
   const devices = useDevices();
 
   return (
@@ -16,6 +16,6 @@ function Dashboard() {
       </SimpleGrid>
     </Box>
   );
-}
+};
 
 export default Dashboard;
