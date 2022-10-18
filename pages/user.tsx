@@ -57,7 +57,9 @@ const NewUserPage: React.FC<NewUserPageProps> = ({ users }) => {
                   <FormErrorMessage>{errors.email}</FormErrorMessage>
                   <b>Existing Users:</b>
                   {' '}
-                  {users.map((u) => u.email).join(', ')}
+                  <Box>
+                    <ul style={{ marginLeft: '2em' }}>{users.map((u) => <li key={u.id}>{u.email}</li>)}</ul>
+                  </Box>
                 </FormControl>
                 <Button type="submit" colorScheme="orange" width="full">
                   Add
